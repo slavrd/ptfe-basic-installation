@@ -41,7 +41,7 @@ On the VM run `curl https://install.terraform.io/ptfe/stable | sudo bash` and fo
 
 1. Open replicated admin console on http://<machine_address>:8800 . If using the Vagrant project `http://192.168.56.33:8800`. Bypass any TLS security warnings. When the webpage is opened Replicated will offer to set up a Hostname and TLS certificate for its admin console.
 
-![set hostname](./secreenshots/../screenshots/replicated-01-hostname.png)
+![set hostname](./screenshots/replicated-01-hostname.png)
 
 For the purpose of the demo set up `192.168.56.33.xip.io` as hostname and choose `Use Self-Signed Cert`. 
 
@@ -56,7 +56,7 @@ Use the `Choose License` button and upload your license.
 3. Next you need to specify the installation method
 
     * Online - Replicated will download and use the latest PTFE package.
-    * Airgiapped - you can supply a package for Replicated to use.
+    * Airgapped - you can supply a package for Replicated to use.
 
 ![installation method](./screenshots/replicated-03-installation-method.png)
 
@@ -74,7 +74,7 @@ For the Demo choose `Password`, enter a password e.g. `Password123#` and press `
 
 5. Next Replicated will perform OS and hardware requirements check.
 
-![prerequsite check](./screenshots/replicated-05-prerequsites.png)
+![prerequisite check](./screenshots/replicated-05-prerequisites.png)
 
 When finished press `Continue`.
 
@@ -99,7 +99,7 @@ The replicated console allows to take snapshots of the current PTFE instance and
 
 ### Restoring from a snapshot
 
-It is possible to perform the Replaicated based PTFE installation by restoring PTFE from a previously taken snapshot.
+It is possible to perform the Replicated based PTFE installation by restoring PTFE from a previously taken snapshot.
 
 **Note:** This repo includes a script `delete_all.sh` that will remove the currently installed PTFE on the Vagrant machine. If you'd like to test the snapshot restoration run `sudo /vagrant/delete_all.sh` on the Vagrant machine. It will remove the replicated installation and keep the snapshots taken in `/var/lib/replicated/snapshots`.
 
