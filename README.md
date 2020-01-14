@@ -16,14 +16,25 @@ Overview of installation steps:
 
 In this section the general steps are described in more details.
 
+## Prerequirements
+
+- Have VirtualBox installed
+- Have Vagrant installed
+
+
 ## Host Machine
 
 In the project root there is Vagrantfile that defines a suitable VM. To use it:
 
-1. Install VirtualBox
-2. Install Vagrant
-3. Run `vagrant up` to build the VM
-4. Run `vagrant ssh` to connect to the VM
+- Create the VM
+```
+vagrant up
+```
+
+- Connect to the VM
+```
+vagrant ssh
+```
 
 The guide is based on this Vagrant project in the root of the repository.
 
@@ -31,11 +42,16 @@ The guide is based on this Vagrant project in the root of the repository.
 
 To install Docker and Replicated can use the following bash [script](https://install.terraform.io/ptfe/stable).
 
-On the VM run `curl https://install.terraform.io/ptfe/stable | sudo bash` and follow the script instructions.
+Run PTFE installation script
+```
+curl https://install.terraform.io/ptfe/stable | sudo bash
+```
 
-1. Select the private IP address of the machine. Use `192.168.56.33`.
-2. Select the service IP address. Leave blank.
-3. Set a proxy if needed. Leave blank.
+Answer the interactive questions:
+
+- Select the private IP address of the machine. Select the interface with the ip `192.168.56.33`.
+- Select the service IP address. Leave blank.
+- Set a proxy if needed. Leave blank.
 
 ## Installing PTFE via Replicated
 
