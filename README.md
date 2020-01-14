@@ -121,5 +121,4 @@ This will start the restore process.
 
 Click on the `Restore` button.
 
-1. Next you will be taken to the Replicated console's cluster section. You can go to the Dashboard section to follow up on the PTFE installation/startup process.
-
+7. Next you will be taken to the Replicated console's cluster section. You can go to the Dashboard section to follow up on the PTFE installation/startup process.
