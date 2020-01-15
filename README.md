@@ -116,37 +116,109 @@ When finished press `Continue`.
 
 ![replicated dashboard](./screenshots/replicated-07-dashboard.png)
 
-## Taking and restoring from snapshots
+## Taking snapshots and restoring from snapshots
 
 The replicated console allows to take snapshots of the current PTFE instance and restore from them when needed.
 
 ### Taking a snapshot
 
 1. Open the Replicated dashboard. If running this Demo should be at `https://192.168.56.33.xip.io:8800/dashboard`.
-2. Press the `Start Snapshot` button and a snapshot will be taken. If using the default Replicated console settings (running this Demo) it will be placed in `/var/lib/replicated/snapshots` on the machine running Replicated.
+2. Press the `Start Snapshot` button and a snapshot will be taken. 
+
+![take snapshot](./screenshots/replicated-08-taking-snapshot.png)
+
+> If using the default Replicated console settings (running this Demo) it will be placed in `/var/lib/replicated/snapshots` on the machine running Replicated.
+
+### Removing the current PTFE installation for THIS DEMO
+
+The repository includes a script `delete_all.sh` that will remove the currently installed PTFE on the Vagrant machine. This is useful for preparing the VM for demonstration of how to restore a PTFE installation from a snapshot.
+
+- On the VM run the script
+
+```
+sudo /vagrant/delete_all.sh
+``` 
+
+- Logout from the VM
+
+```
+exit
+```
+
+- Restart the VM
+
+```
+vagrant reload
+```
+
+- Login to the VM
+
+```
+vagrant ssh
+```
 
 ### Restoring from a snapshot
 
-It is possible to perform the Replicated based PTFE installation by restoring PTFE from a previously taken snapshot.
+The process to restore a PTFE installation from a snapshot is similar to the process to perform a fresh installation. 
 
-**Note:** This repo includes a script `delete_all.sh` that will remove the currently installed PTFE on the Vagrant machine. If you'd like to test the snapshot restoration run `sudo /vagrant/delete_all.sh` on the Vagrant machine. It will remove the replicated installation and keep the snapshots taken in `/var/lib/replicated/snapshots`.
+#### Install Replicated
 
-1. Follow the Replicated installation steps until you get to [Installing PTFE via Replicated, step 2](#installing-ptfe-via-replicated). 
-2. On that click on `restore from snapshot` instead of uploading the license. 
-3. On the next screen you can enter the snapshot location (leave as it is if running this Demo) and click on `Browse snapshots` button to display all available snapshots.
+To install Replicated can use the following bash [script](https://install.terraform.io/ptfe/stable).
+
+Run PTFE installation script
+
+```
+curl https://install.terraform.io/ptfe/stable | sudo bash
+```
+
+Answer the interactive questions:
+
+- Select the private IP address of the machine. Select the interface with the ip `192.168.56.33`.
+- Select the service IP address. Leave blank.
+- Set a proxy if needed. Leave blank.
+
+#### Installing PTFE via Replicated using a snapshot
+
+1. Open replicated admin console.
+
+  In your browser open `http://192.168.56.33:8800`. 
+  
+  Bypass any TLS security warnings. When the webpage is opened Replicated will offer to set up a Hostname and TLS certificate for its admin console.
+
+  For the purpose of the demo:
+   
+   - set `192.168.56.33.xip.io` as hostname.
+   - click on the `Use Self-Signed Cert` button.
+
+![set hostname](./screenshots/replicated-01-hostname.png)
+
+> Because of the self signed certificate you'll need to bypass the browser TLS security warning every time you access the replicated console.
+
+2. On the next screen the Replicated console will ask to upload the license file for your PTFE installation if performing a fresh install or if you'd like to restore from existing snapshot.
+
+- click on `restore from snapshot` instead of uploading the license. 
+
+![snapshots](./screenshots/replicated-09-license-restore.png)
+
+3. On the next screen you can enter the snapshot location (leave as it is if running this Demo) and 
+
+- click on `Browse snapshots` button to display all available snapshots.
+- click on the `restore` button next to the snapshot you would like to use for restore.
 
 ![snapshots](./screenshots/replicated-09-restore-snapshot.png)
 
-Click on the `restore` button next to the snapshot you would like to use for restore.
-
 This will start the restore process. 
 
-4. It may ask you to authenticate to the Replicated console using the method set in instance from which the snapshot was taken from.
-5. The process will then go through the OS and hardware check list.
-6. On the nest screen you will see the cluster that is being restored.
+You may be asked to authenticate to the Replicated console using the method set in instance the snapshot was taken from.
+
+The process will then go through the OS and hardware check list.
+
+1. On the next screen you will see the cluster that is being restored.
+
+- click on the `Restore` button.
 
 ![restore cluster](./screenshots/replicated-10-restore-cluster.png)
 
-Click on the `Restore` button.
+5. Next you will be taken to the Replicated console's cluster section. You can go to the Dashboard section to follow up on the PTFE installation/startup process.
 
-7. Next you will be taken to the Replicated console's cluster section. You can go to the Dashboard section to follow up on the PTFE installation/startup process.
+![cluster view](./screenshots/replicated-11-cluster-view.png)
