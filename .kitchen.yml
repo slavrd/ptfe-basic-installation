@@ -1,17 +1,16 @@
 ---
 driver:
   name: vagrant
+  box: slavrd/bionic64
+  provider: virtualbox
+  vagrantfiles:
+        - Vagrantfile
 
 provisioner:
   name: shell
 
 platforms:
-  - name: ubuntu-docker-virtualbox
-    driver:
-      box: slavrd/bionic64
-      provider: virtualbox
-      vagrantfiles:
-        - Vagrantfile
+  - name: ubuntu-docker-virtualbox     
 
 verifier:
   name: inspec
