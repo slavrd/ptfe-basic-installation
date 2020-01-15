@@ -21,7 +21,7 @@ The repository includes a Kitchen test that can be used ot test if a Vagrant box
 
 ## Configuring the test
 
-Set the Vagrant box you want to check as a value for key `driver.box` in the `.kitchen.yml` file. For example
+Set the Vagrant box you want to check as a value for key `driver.box` in the `.kitchen.yml` file. For example:
 
 ```YML
 driver:
@@ -43,7 +43,7 @@ driver:
   bundle exec kitchen verify
   ```
 
-  If tests pass you should see similar output
+  If tests pass you should see output similar to the below:
 
   ![kitchen test passed](./screenshots/kitchen-test-pass.png)
 
