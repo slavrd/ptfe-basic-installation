@@ -9,7 +9,7 @@ The guide describes how to perform a Demo installation of PTFEv4 - all applicati
 Overview of installation steps:
 
 1. Create a machine that satisfies the PTFE [requirements](https://www.terraform.io/docs/enterprise/before-installing/index.html#linux-instance).
-2. Install docker and [`Replicated`](https://www.replicated.com/index.html).
+2. Install [`Replicated`](https://www.replicated.com/index.html).
 3. From the `Replicated` console Install PTFEv4 using the a `Replicated` installation package. Can install a fresh PTFEv4 instance or restore from a replicated snapshot.
 
 # Detailed installation steps
@@ -36,13 +36,14 @@ vagrant up
 vagrant ssh
 ```
 
-The guide is based on this Vagrant project in the root of the repository.
+From this point the guide assumes you are using the Vagrant project.
 
-## Install Docker and Replicated
+## Install Replicated
 
-To install Docker and Replicated can use the following bash [script](https://install.terraform.io/ptfe/stable).
+To install Replicated can use the following bash [script](https://install.terraform.io/ptfe/stable).
 
 Run PTFE installation script
+
 ```
 curl https://install.terraform.io/ptfe/stable | sudo bash
 ```
@@ -55,38 +56,43 @@ Answer the interactive questions:
 
 ## Installing PTFE via Replicated
 
-1. Open replicated admin console on http://<machine_address>:8800 . If using the Vagrant project `http://192.168.56.33:8800`. Bypass any TLS security warnings. When the webpage is opened Replicated will offer to set up a Hostname and TLS certificate for its admin console.
+1. Open replicated admin console.
+
+  In your browser open `http://192.168.56.33:8800`. 
+  
+  Bypass any TLS security warnings. When the webpage is opened Replicated will offer to set up a Hostname and TLS certificate for its admin console.
+
+  For the purpose of the demo:
+   
+   - set `192.168.56.33.xip.io` as hostname.
+   - click on the `Use Self-Signed Cert` button.
 
 ![set hostname](./screenshots/replicated-01-hostname.png)
 
-For the purpose of the demo set up `192.168.56.33.xip.io` as hostname and choose `Use Self-Signed Cert`. 
+> Because of the self signed certificate you'll need to bypass the browser TLS security warning every time you access the replicated console.
 
-**Note**: Because of the self signed certificate you'll need to bypass the browser TLS security warning every time you access the replicated console.
-
-2. On the next screen the Replicated console will ask to upload the license file for your PTFE installation if performing a fresh install or of you'd like to restore from existing snapshot.
-
-![add license](./screenshots/replicated-02-license.png)
+2. On the next screen the Replicated console will ask to upload the license file for your PTFE installation if performing a fresh install or if you'd like to restore from existing snapshot.
 
 Use the `Choose License` button and upload your license.
 
+![add license](./screenshots/replicated-02-license.png)
+
 3. Next you need to specify the installation method
 
-    * Online - Replicated will download and use the latest PTFE package.
-    * Airgapped - you can supply a package for Replicated to use.
+    - Online - Replicated will download and use the latest PTFE package.
+    - Airgapped - you can supply a package for Replicated to use.
+
+Choose `Online` and press `Continue`.
 
 ![installation method](./screenshots/replicated-03-installation-method.png)
 
-Choose `Online` for the demo and press `Continue`.
+1. On the following page you cаn secure access to the Replicated console.
 
-4. On the following page you cаn secure access to the Replicated console. Can choose:
-
-    * Anonymous - no restrictions.
-    * Password - use a single password to access the console.
-    * LDAP - authenticate via existing directory service.
+    - choose `Password`
+    - enter a password e.g. `Password123#` 
+    - press `Continue`.
 
 ![console access](./screenshots/replicated-04-console-password.png)
-
-For the Demo choose `Password`, enter a password e.g. `Password123#` and press `Continue`.
 
 5. Next Replicated will perform OS and hardware requirements check.
 
@@ -94,13 +100,19 @@ For the Demo choose `Password`, enter a password e.g. `Password123#` and press `
 
 When finished press `Continue`.
 
-6. On the next screen you need to setup PTFE installation itself.
+6. On the next screen you need to setup PTFE installation itself. For the demo set up:
+
+    - `Encryption Password` e.g. `Password123#`
+    - choose `Demo` for `Installation Type`. This will install all services needed for the PTFE application on the current machine.
+    - click `Save` button on the bottom of the page.
 
 ![ptfe settings](./screenshots/replicated-06-ptfe-settings.png)
 
-Set up an `Encryption Password` e.g. `Password123#` and choose `Demo` for `Installation Type`. This will install all services needed for the PTFE application on the current machine.
+7. Next a prompt confirming that the settings are saved will be displayed. Click on `Restart Now` button to apply them and restart the app.
 
-7. Next the Replicated dashboard is opened. On it you will see a progress indication for the PTFE startup. Once it is finished you will see the following screen:
+![ptfe settings saved](./screenshots/replicated-06-ptfe-settings-saved.png)
+
+8. Next the Replicated dashboard is opened. On it you will see a progress indication for the PTFE startup. Once it is finished you will see the following screen:
 
 ![replicated dashboard](./screenshots/replicated-07-dashboard.png)
 
