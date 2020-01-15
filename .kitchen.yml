@@ -1,0 +1,21 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: shell
+
+platforms:
+  - name: ubuntu-docker-virtualbox
+    driver:
+      box: slavrd/bionic64
+      provider: virtualbox
+      vagrantfiles:
+        - Vagrantfile
+
+verifier:
+  name: inspec
+  sudo: false
+
+suites:
+  - name: default
